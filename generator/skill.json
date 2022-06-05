@@ -1,0 +1,66 @@
+{
+    "buffs" : 
+        {
+            "AFFECTING" : [
+                "ally",
+                "team"
+            ],
+            "KEYWORD" : [
+                "disable"
+            ],
+            "SILVER" : {
+                "PERCENTAGES": [4, 7],
+                "AFFECTING" : ["ally"]
+            },
+            "GOLD": {
+                "PERCENTAGES": [7, 10],
+                "AFFECTING" : ["ally"]
+            },
+            "PLATINUM": {
+                "PERCENTAGES": [7, 10],
+                "AFFECTING" : ["ally", "team"]
+            },
+            "DIAMOND": {
+                "PERCENTAGES": [10, 13],
+                "AFFECTING" : ["ally", "team"],
+                "//UNIQUE" : [
+                    {
+                        "SKILL":""
+                    }
+                ]
+            }
+        },
+    "debuffs" : 
+        {
+            "AFFECTING" : [
+                "opponent",
+                "team"
+            ],
+            "KEYWORD" : [
+                "disable"
+            ],
+            "SILVER" : {
+                "PERCENTAGES": [4, 7],
+                "AFFECTING" : ["opponent"]
+            },
+            "GOLD": {
+                "PERCENTAGES": [7, 10],
+                "AFFECTING" : ["opponent"]
+            },
+            "PLATINUM": {
+                "PERCENTAGES": [7, 10],
+                "AFFECTING" : ["opponent", "team"]
+            },
+            "DIAMOND": {
+                "PERCENTAGES": [10, 13],
+                "AFFECTING" : ["opponent", "team"],
+                "UNIQUE" : [
+                    {
+                        "SKILL":"disable",
+                        "AFFECTING": "opponent"
+                    }
+                ]
+            }
+        }
+    
+}
