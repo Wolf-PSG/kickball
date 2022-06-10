@@ -41,7 +41,7 @@ func ReadFile() map[string]interface{} {
 	return result
 }
 
-func Skill(modifier string) string {
+func Skill(modifier interface{}) string {
 	jsonResult := ReadFile()
 	var skillTypes = []string{
 		"buffs",
@@ -59,7 +59,7 @@ func Skill(modifier string) string {
 	for key, value := range jsonResult {
 		if key == skill {
 			row := value.(map[string]interface{})
-			modifiedRow, exist := row[modifier]
+			modifiedRow, exist := row[modifier.(string)]
 			if exist {
 				correction, exist := modifiedRow.(map[string]interface{})
 				if exist {
@@ -88,5 +88,5 @@ func Skill(modifier string) string {
 }
 
 func GeneratePercentages(min int, max int) int {
-	return rand.Intn((max - min) + min)
+	return rand.Intn((max - min)) + min
 }

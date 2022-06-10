@@ -42,6 +42,12 @@ var PlayerQueryType = graphql.NewObject(graphql.ObjectConfig{
 		"division": &graphql.Field{
 			Type: graphql.String,
 		},
+		"experience_required": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"current_experience": &graphql.Field{
+			Type: graphql.Int,
+		},
 	},
 })
 
@@ -66,11 +72,32 @@ var playerModifierEnumType = graphql.NewEnum(graphql.EnumConfig{
 	},
 })
 
+var playerAttributeEnumType = graphql.NewEnum(graphql.EnumConfig{
+	Name: "attribute",
+	Values: graphql.EnumValueConfigMap{
+		"speed": &graphql.EnumValueConfig{
+			Value: "Speed",
+		},
+		"power": &graphql.EnumValueConfig{
+			Value: "Power",
+		},
+		"accuracy": &graphql.EnumValueConfig{
+			Value: "Accuracy",
+		},
+		"defence": &graphql.EnumValueConfig{
+			Value: "Defence",
+		},
+		"passing": &graphql.EnumValueConfig{
+			Value: "Passing",
+		},
+	},
+})
+
 var RootQuery = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Query",
 	Fields: graphql.Fields{
 		"player": &graphql.Field{
-			Type: graphql.NewList(PlayerQueryType),
+			Type: PlayerQueryType,
 			Args: graphql.FieldConfigArgument{
 				"id": &graphql.ArgumentConfig{
 					Type: graphql.String,
@@ -100,6 +127,22 @@ var RootQuery = graphql.NewObject(graphql.ObjectConfig{
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				return resolvers.Generate(p.Args["modifier"]), nil
+			},
+		},
+		"train": &graphql.Field{
+			Type: PlayerQueryType,
+			Args: graphql.FieldConfigArgument{
+				"id": &graphql.ArgumentConfig{
+					Description: "train an existing player, if ommited returns nothing",
+					Type:        graphql.String,
+				},
+				"attribute": &graphql.ArgumentConfig{
+					Description: "attribute that needs to be trained, if ommited returns nothing",
+					Type:        playerAttributeEnumType,
+				},
+			},
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				return resolvers.Train(p.Args["id"].(string), p.Args["attribute"].(string)), nil
 			},
 		},
 	},
