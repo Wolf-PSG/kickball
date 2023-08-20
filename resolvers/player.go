@@ -111,10 +111,6 @@ func ToLower(formattedAttribute string) {
 	panic("unimplemented")
 }
 
-func toLower(formattedAttribute string) {
-	panic("unimplemented")
-}
-
 // 	defer func() {
 // if err := client.Disconnect(context.TODO()); err != nil {
 // panic(err)
